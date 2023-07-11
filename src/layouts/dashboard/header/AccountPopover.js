@@ -37,7 +37,7 @@ export default function AccountPopover() {
 
   const handleLogout = () => {
     AuthService.logout();
-    navigate('/login');
+    navigate('/');
   };
 
   return (

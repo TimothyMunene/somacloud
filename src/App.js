@@ -22,8 +22,8 @@ import PrivateRoute from "./PrivateRoute";
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="" element={<DashboardLayout />}>
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<DashboardLayout />}>
         <Route path="" element={<Dashboard />}>
           <Route
             element={<ProtectedRoute roles={["ROLE_USER", "ROLE_ADMIN"]} />}
@@ -31,7 +31,13 @@ function App() {
             <Route index element={<Dashboard />} />
           </Route>
         </Route>
-
+        <Route path="marks" element={<PrivateRoute />}>
+          <Route
+            element={<ProtectedRoute roles={["ROLE_USER", "ROLE_ADMIN"]} />}
+          >
+            <Route index element={<MarkTabs/>} />
+          </Route>
+        </Route>
         <Route path="sms" element={<PrivateRoute />}>
           <Route
             element={<ProtectedRoute roles={["ROLE_USER", "ROLE_ADMIN"]} />}
@@ -58,13 +64,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="marks" element={<PrivateRoute />}>
-          <Route
-            element={<ProtectedRoute roles={["ROLE_USER", "ROLE_ADMIN"]} />}
-          >
-            <Route index element={<MarkTabs/>} />
-          </Route>
-        </Route>
+
       </Route>
     </Routes>
   );
