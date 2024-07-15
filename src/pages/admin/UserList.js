@@ -34,11 +34,13 @@ const TABLE_HEAD = [
 ];
 
 export default function UsersList() {
+  console.log("hello user list, we are in")
   const [open, setOpen] = useState(null);
   const [page, setPage] = useState(0);
   const [selected, setSelected] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [data, setData] = useState([]);
+
   const navigate = useNavigate();
 
   const handleOpenMenu = (event) => {
@@ -60,13 +62,20 @@ export default function UsersList() {
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
-
-  useEffect(() => {
+    const school=JSON.parse(localStorage.getItem("school"));
+    
     const code = AuthService.getCurrentUser()?.code;
     const schoolCode = Number(code);
+    console.log("code in user list"+schoolCode)
+  useEffect(() => {
+    
     axios
-      .get(`/users?code=${schoolCode}`)
-      .then((response) => setData(response.data))
+      .get(`/users?schoolCode=${schoolCode}`)
+      .then((response) => {
+
+        setData(response.data)
+      
+      })
       .catch((error) => {
         if (error?.response?.status === 401) {
           navigate("/login");
@@ -108,7 +117,7 @@ export default function UsersList() {
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((row) => {
-                        const { id, userName, email, phone, role, password } =
+                        const { id, username, email, phone, role, password } =
                           row;
                         const selectedRecord = selected.indexOf(id) !== -1;
                         return (
@@ -123,7 +132,7 @@ export default function UsersList() {
                               {id}
                             </TableCell>
                             <TableCell align="left">
-                              {sentenceCase(userName)}
+                              {sentenceCase(username)}
                             </TableCell>
                             <TableCell align="left">{email}</TableCell>
                             <TableCell align="right">{phone}</TableCell>

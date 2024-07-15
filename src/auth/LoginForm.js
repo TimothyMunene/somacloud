@@ -39,10 +39,10 @@ export default function LoginForm() {
        console.log("trst 2"+test)
        if(test){
         enqueueSnackbar("Login successful",{ variant: 'success' }) 
-        navigate('/home');
+        navigate('/');
        }else{
         enqueueSnackbar("Login unsuccessful",{ variant: 'error' }) 
-        navigate('/');
+        navigate('/login');
        }
         
        

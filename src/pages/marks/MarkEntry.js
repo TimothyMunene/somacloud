@@ -60,7 +60,7 @@ if(validate(formValues)){
   axios.post('/marks/add/mark', formValues)
   .then((response) => {
     enqueueSnackbar('Marks updated successfully', { variant: 'success' });
-    ////navigate('admin/users');
+    ////navigate('admin/users')
   })
   .catch((error) => {
       enqueueSnackbar("Error adding Marks", { variant: 'error' });

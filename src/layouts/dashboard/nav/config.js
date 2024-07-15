@@ -11,22 +11,22 @@ const icon = (name) => <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ 
 const navConfig = [
   {
     title: 'dashboard',
-    path: '/home',
+    path: '/',
     icon: icon('ic_analytics'),
   },
   {
     title: 'Marks Entry',
-    path: '/home/marks',
+    path: '/marks',
     icon: icon('ic_wallet'),
   },
   {
     title: 'SMS',
-    path: '/home/sms',
+    path: '/sms',
     icon: icon('ic_transfer'),
   },
   {
     title: 'Admin',
-    path: '/home/admin',
+    path: '/admin',
     icon: icon('ic_transaction'),
   }
 ];

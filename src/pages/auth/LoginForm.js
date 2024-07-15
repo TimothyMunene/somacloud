@@ -32,7 +32,7 @@ export default function LoginForm() {
         navigate('/');
       })
       .catch((error) => {
-        navigate('/')
+        navigate('/login')
         // if (error.response?.data?.errors) {
          //     error.response?.data?.errors.map((e) => enqueueSnackbar(e.message, { variant: 'error' }));
          //     navigate('/');

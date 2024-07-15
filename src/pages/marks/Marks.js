@@ -81,7 +81,7 @@ export default function Marks({ dat }) {
       .then((response) => console.log(response))
       .catch((error) => {
         if (error?.response?.status === 401) {
-          navigate("/login");
+          //navigate("/login");
         } else if (error.response?.data?.errors) {
           error.response?.data?.errors.map((e) =>
             enqueueSnackbar(e.message, { variant: "error" })

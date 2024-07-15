@@ -25,14 +25,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
   const navigate = useNavigate();
-  //const currentUser = AuthService.getCurrentUser();
-  //console.log("localStorage.getItem(")
-  //console.log(localStorage.getItem("user"))
   const user=JSON.parse(localStorage.getItem("user"));
-  //console.log("user over")
-  //console.log(user)
-  //console.log("school code")
-  //console.log(user.data.code)
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -44,7 +37,7 @@ export default function AccountPopover() {
 
   const handleLogout = () => {
     AuthService.logout();
-    navigate('/');
+    navigate('/login');
   };
 
   return (
@@ -89,7 +82,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {capitalCase(user?.data.firstName)}
+            {capitalCase(user?.username)}
           </Typography>
         </Box>
         <Divider sx={{ borderStyle: 'dashed' }} />

@@ -18,7 +18,7 @@ export default function AddUser() {
     email: '',
     teacherId: 28,
     role:"user",
-    code:645992
+    schoolCode:645992
   };
 
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function AddUser() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    HttpService.postWithoutAuth('/users/new', formValues)
+    HttpService.postWithoutAuth('/users/add', formValues)
       .then((response) => {
         enqueueSnackbar('User added successfully', { variant: 'success' });
         ////navigate('admin/users');
@@ -73,12 +73,12 @@ export default function AddUser() {
         <Grid container alignItems="left" justify="left" direction="column" sx={{ width: 400, padding: 5 }}>
           <Stack spacing={3}>
              <TextField
-              id="userName"
-              name="userName"
+              id="username"
+              name="username"
               label="User Name"
               autoFocus
               required
-              value={formValues.UserName}
+              value={formValues.username}
               onChange={handleInputChange}
             />
             <TextField

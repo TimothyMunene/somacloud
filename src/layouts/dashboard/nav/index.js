@@ -48,7 +48,9 @@ export default function Nav({ openNav, onCloseNav }) {
 
   const isDesktop = useResponsive("up", "lg");
   const newDash = navConfig.slice(0, 2);
-  const role = AuthService.getCurrentUser()?.role;
+  const user=JSON.parse(localStorage.getItem("user"));
+  const role = user?.role;
+  
   const dash = role === "admin" ? [...navConfig] : [...newDash];
 
   useEffect(() => {

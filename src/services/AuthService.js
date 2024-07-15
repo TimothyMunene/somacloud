@@ -1,42 +1,38 @@
 import axios from "./axios";
 
 const login = (body) => {
+  const url = "/auth/login";
+  const form = {
+    "schoolCode": body.code,
+    "username": body.email,
+    "password": body.password,
+  };
 
-const url = "/auth/login";
-const form= {
-  "schoolCode": body.code,
-  "username": body.email,
-  "password": body.password
-}
+  return axios.get(`/schools?schoolCode=${body.code}`)
+    .then((response) => {
+      localStorage.setItem("school", JSON.stringify(response.data[0]));
+      
+      return axios.post(url, form);
+    })
+    .then((response) => {
+      const isUserDataStored = response?.data ? true : false;
+      
+      localStorage.setItem("user", JSON.stringify(response.data.data));
+      
 
-axios.get(`/schools?schoolCode=${body.code}`)
-  .then((response) => {
-    localStorage.setItem("school", JSON.stringify(response.data[0]));
-    //console.log(localStorage.getItem("school"));
+      const user = JSON.parse(localStorage.getItem("user"));
+      
 
-    //return response;
-  })
-  .catch((error) => {
-    //console.log(error);
-  });
+      if (isUserDataStored) {
+        // You can add any additional logic here to handle the successful user data storage
+      }
 
-//console.log(form)
-  return axios.post(url,form)
-  .then((response) => {
-    const test = response?.data ? true : false;
-    //console.log(response.data);
-    //console.log("test=" + test);
-    if (test) {
-      localStorage.setItem("user", JSON.stringify(response.data));
-      //const currentUser = AuthService.getCurrentUser();
-      //console.log("currentUser=" + currentUser);
-      //localStorage.setItem("school", JSON.stringify(response));
-    }
-
-   // console.log("get user");
-    //console.log(JSON.parse(localStorage.getItem("user")));
-    return test;
-  });
+      return isUserDataStored;
+    })
+    .catch((error) => {
+      console.error("Error saving user data:", error);
+      return false;
+    });
 };
 
 const signup = (body) => {
@@ -49,6 +45,7 @@ const logout = () => {
 };
 
 const getCurrentUser = () => JSON.parse(localStorage.getItem("user"));
+
 const getCurrentSchool = () => JSON.parse(localStorage.getItem("school"));
 
 const AuthService = {

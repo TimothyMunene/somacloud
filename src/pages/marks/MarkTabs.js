@@ -175,7 +175,7 @@ const selections={classId:selectedClass?.classId,termId:selectedTerm?.termId,yea
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <MarkEntry code={Number(code)} dat={selections}/>
+              <MarkEntry dat={selections} code={Number(code)} />
         
             </TabPanel>
             
